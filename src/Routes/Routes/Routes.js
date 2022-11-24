@@ -1,5 +1,6 @@
 import Blogs from "../../Pages/Blogs/Blogs";
 import Cars from "../../Pages/Cars/Cars";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>
+            },
+            {
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>
             },
             {
                 path: '/signup',
