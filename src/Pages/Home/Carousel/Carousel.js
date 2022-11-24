@@ -14,7 +14,7 @@ const Carousel = () => {
                             “Second Wheel is not about used cars. It's about your dream.”<br />
                             Buy and sell your car here!
                         </p>
-                        <Link to='/services'><button className="btn bg-slate-600 btn-sm">
+                        <Link><button className="btn bg-slate-600 btn-sm">
                             About Us <FaArrowAltCircleRight className='ml-1' />
                         </button></Link>
                     </div>
