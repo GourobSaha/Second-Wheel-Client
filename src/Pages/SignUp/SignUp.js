@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import GoogleLogin from '../GoogleLogin/GoogleLogin';
@@ -15,8 +16,12 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                toast.success('Successfully Signed Up!')
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.error(error);
+                toast.error(error.message);
+            })
     }
     return (
         <div>

@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
 import GoogleLogin from '../GoogleLogin/GoogleLogin';
 
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { signIn } = useContext(AuthContext);
 
     const handleLogin = data => {
         console.log(data);
+        console.log(data);
+        signIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('Successfully Logged In!')
+            })
+            .catch(error => {
+                console.error(error);
+                toast.error(error.message);
+            })
+
     }
     return (
         <div className='container mx-auto'>
