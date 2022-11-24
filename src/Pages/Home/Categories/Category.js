@@ -11,7 +11,7 @@ const Category = ({ category }) => {
                 <div className="card-body">
                     <h2 className="text-2xl font-semibold text-slate-600 text-center">{name}</h2>
                     <div className="card-actions justify-center">
-                        <Link to={_id}><button className="btn bg-slate-600 btn-sm">
+                        <Link to={`/categories/${_id}`}><button className="btn bg-slate-600 btn-sm">
                             View More <FaArrowAltCircleRight className='ml-1' />
                         </button></Link>
                     </div>

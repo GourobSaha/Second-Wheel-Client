@@ -1,3 +1,5 @@
+import Blogs from "../../Pages/Blogs/Blogs";
+import Cars from "../../Pages/Cars/Cars";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -12,7 +14,17 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
-            }
+            },
+            {
+                path: '/blogs',
+                element: <Blogs></Blogs>
+            },
+            {
+                path: '/categories/:id',
+                element: <Cars></Cars>,
+                loader: ({ params }) =>
+                    fetch(`http://localhost:5000/categories/${params.id}`)
+            },
         ]
     },
     {
