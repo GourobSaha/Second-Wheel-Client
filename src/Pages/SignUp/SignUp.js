@@ -7,7 +7,7 @@ import GoogleLogin from '../GoogleLogin/GoogleLogin';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUser } = useContext(AuthContext);
 
     const handleSignUp = data => {
         console.log(data);
@@ -16,6 +16,12 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => { })
+                    .catch(error => console.log(error))
                 toast.success('Successfully Signed Up!')
             })
             .catch(error => {

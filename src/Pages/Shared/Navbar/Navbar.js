@@ -23,7 +23,8 @@ const Navbar = () => {
         {user?.uid ?
             <>
                 <li><Link to='/dashboard' className='font-semibold'>Dashboard</Link></li>
-                <li><button className='font-semibold text-xl tooltip tooltip-bottom' data-tip="Logout" onClick={handleLogOut}><FaSignOutAlt /></button></li>
+                <li><p className='font-semibold'>{user?.displayName}</p></li>
+                <li><button className='font-semibold text-xl tooltip tooltip-right' data-tip='Logout' onClick={handleLogOut}><FaSignOutAlt /></button></li>
             </>
             :
             <li><Link to='/login' className='font-semibold'>Login</Link></li>
