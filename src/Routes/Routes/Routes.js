@@ -1,6 +1,8 @@
 import Blogs from "../../Pages/Blogs/Blogs";
 import Cars from "../../Pages/Cars/Cars";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
+import Login from "../../Pages/Login/Login";
+import SignUp from "../../Pages/SignUp/SignUp";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
             {
                 path: '/blogs',
                 element: <Blogs></Blogs>
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
+            },
+            {
+                path: '/signup',
+                element: <SignUp></SignUp>
             },
             {
                 path: '/categories/:id',

@@ -35,7 +35,7 @@ const CarCategory = ({ car }) => {
                                 <th>Seller:</th>
                                 <td className='flex items-center'>
                                     <p>{sellerName} </p>
-                                    <p className='text-green-700'>{isVerified && <MdVerifiedUser></MdVerifiedUser>}</p>
+                                    <p className='text-green-600 tooltip tooltip-right tooltip-success' data-tip="Verified Seller">{isVerified && <MdVerifiedUser></MdVerifiedUser>}</p>
                                 </td>
                             </tr>
                             <tr>
