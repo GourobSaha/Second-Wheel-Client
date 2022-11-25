@@ -4,6 +4,7 @@ import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
@@ -27,18 +28,18 @@ const router = createBrowserRouter([
                 element: <Login></Login>
             },
             {
-                path: '/dashboard',
-                element: <Dashboard></Dashboard>
-            },
-            {
                 path: '/signup',
                 element: <SignUp></SignUp>
             },
             {
                 path: '/categories/:id',
-                element: <Cars></Cars>,
+                element: <PrivateRoute><Cars></Cars></PrivateRoute>,
                 loader: ({ params }) =>
                     fetch(`http://localhost:5000/categories/${params.id}`)
+            },
+            {
+                path: '/dashboard',
+                element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
             },
         ]
     },
