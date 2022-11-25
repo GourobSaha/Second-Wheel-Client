@@ -1,10 +1,10 @@
 import React from 'react';
 import { FaArrowAltCircleRight } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { MdVerifiedUser } from "react-icons/md";
 
-const CarCategory = ({ car }) => {
+const CarCategory = ({ car, setBookCar }) => {
     const { img, name, description, location, resaleValue, originalPrice, condition, sellerName, usedYears, isVerified } = car;
+
     return (
         <div className="shadow-xl p-5 rounded-xl my-5">
             <img src={img} alt="Shoes" className='lg:h-96 mx-auto p-3' />
@@ -51,9 +51,11 @@ const CarCategory = ({ car }) => {
                 </div>
                 <p className='my-3'>{description}</p>
                 <div className="card-actions justify-center mt-5">
-                    <Link to=''><button className="btn bg-slate-600 btn-sm">
-                        Book Now <FaArrowAltCircleRight className='ml-1' />
-                    </button></Link>
+                    <label
+                        htmlFor="booking-modal"
+                        className="btn bg-slate-600 btn-sm"
+                        onClick={() => setBookCar(car)}
+                    >Book Now <FaArrowAltCircleRight className='ml-1' /></label>
                 </div>
             </div>
         </div>

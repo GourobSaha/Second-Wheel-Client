@@ -8,7 +8,7 @@ const Footer = () => {
             <footer className="footer p-10  text-white container mx-auto">
                 <div>
                     <img src={logo} alt="" />
-                    <p><span className='font-bold'>Second Wheel</span><br />Providing reliable tech since 1992</p>
+                    <p><span className='font-bold'>Second Wheel</span><br />We provide dream</p>
                 </div>
                 <div>
                     <span className="footer-title">Services</span>

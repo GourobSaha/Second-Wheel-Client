@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookingModal from './BookingModal';
 import CarCategory from './CarCategory';
 
 const Cars = () => {
     const cars = useLoaderData();
-    console.log(cars);
-
+    // console.log(cars);
+    const [bookCar, setBookCar] = useState(null)
 
     return (
         <div className='my-5 container mx-auto'>
@@ -15,9 +16,17 @@ const Cars = () => {
                     cars.map(car => <CarCategory
                         key={car._id}
                         car={car}
+                        setBookCar={setBookCar}
                     ></CarCategory>)
                 }
             </div>
+            {
+                bookCar &&
+                <BookingModal
+                    bookCar={bookCar}
+                    setBookCar={setBookCar}
+                ></BookingModal>
+            }
         </div>
     );
 };
