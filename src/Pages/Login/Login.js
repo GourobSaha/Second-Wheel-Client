@@ -7,7 +7,7 @@ import GoogleLogin from '../GoogleLogin/GoogleLogin';
 
 
 const Login = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const { signIn } = useContext(AuthContext);
 
     const handleLogin = data => {
@@ -18,6 +18,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 toast.success('Successfully Logged In!')
+                reset();
             })
             .catch(error => {
                 console.error(error);

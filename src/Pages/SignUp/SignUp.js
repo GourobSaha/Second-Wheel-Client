@@ -6,7 +6,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 import GoogleLogin from '../GoogleLogin/GoogleLogin';
 
 const SignUp = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const { createUser, updateUser } = useContext(AuthContext);
 
     const handleSignUp = data => {
@@ -23,6 +23,7 @@ const SignUp = () => {
                     .then(() => { })
                     .catch(error => console.log(error))
                 toast.success('Successfully Signed Up!')
+                reset();
             })
             .catch(error => {
                 console.error(error);
