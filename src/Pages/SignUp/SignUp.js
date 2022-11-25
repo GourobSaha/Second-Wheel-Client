@@ -1,18 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import useToken from '../../Hooks/useToken';
 import GoogleLogin from '../GoogleLogin/GoogleLogin';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const { createUser, updateUser } = useContext(AuthContext);
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail);
 
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const from = location.state?.from?.pathname || '/';
+    if (token) {
+        navigate('/')
+    }
 
     const handleSignUp = data => {
         console.log(data);
@@ -25,10 +29,11 @@ const SignUp = () => {
                     displayName: data.name
                 }
                 updateUser(userInfo)
-                    .then(() => { })
+                    .then(() => {
+                        saveUser(data.name, data.email, data.role);
+                        toast.success('Successfully Signed Up!')
+                    })
                     .catch(error => console.log(error))
-                navigate(from, { replace: true });
-                toast.success('Successfully Signed Up!')
                 reset();
             })
             .catch(error => {
@@ -36,6 +41,27 @@ const SignUp = () => {
                 toast.error(error.message);
             })
     }
+
+    const saveUser = (name, email, role) => {
+        const user = {
+            name, email, role
+        };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setCreatedUserEmail(email);
+            })
+    }
+
+
+
     return (
         <div>
             <div className='my-10 md:my-20 flex justify-center items-center'>

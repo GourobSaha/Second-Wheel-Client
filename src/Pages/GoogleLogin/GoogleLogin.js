@@ -1,17 +1,23 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaGoogle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import useToken from '../../Hooks/useToken';
 
 const GoogleLogin = () => {
     const { providerLogin } = useContext(AuthContext);
-
+    const [loginEmail, setLoginEmail] = useState('');
+    const [token] = useToken(loginEmail);
     const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -20,12 +26,30 @@ const GoogleLogin = () => {
             .then(res => {
                 const user = res.user;
                 console.log(user);
-                navigate(from, { replace: true });
+                saveUser(user.displayName, user.email, "Buyer");
+                setLoginEmail(user?.email);
                 toast.success('Successfully Logged In!');
             })
             .catch(error => {
                 console.error(error);
                 toast.error(error.message);
+            })
+    }
+
+    const saveUser = (name, email, role) => {
+        const user = {
+            name, email, role
+        };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
             })
     }
 
