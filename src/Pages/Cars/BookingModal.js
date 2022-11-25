@@ -17,6 +17,7 @@ const BookingModal = ({ bookCar, setBookCar }) => {
 
         const booking = {
             buyer: name,
+            img: bookCar.img,
             email,
             carName,
             resaleValue,
@@ -24,9 +25,26 @@ const BookingModal = ({ bookCar, setBookCar }) => {
             meetingLocation
         }
 
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    setBookCar(null);
+                    toast.success('Booking Confirmed');
+                }
+                else {
+                    toast(data.message);
+                }
+            })
+
         console.log(booking);
-        setBookCar(null);
-        toast.success('Successfully Booked');
     }
 
     return (

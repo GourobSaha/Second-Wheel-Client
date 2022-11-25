@@ -11,7 +11,7 @@ const Cars = () => {
     return (
         <div className='my-5 container mx-auto'>
             <h1 className='text-4xl text-slate-600 font-bold text-center my-5'>Categories</h1>
-            <div className='grid md:grid-cols-2 gap-4'>
+            <div className='grid lg:grid-cols-2 gap-4'>
                 {
                     cars.map(car => <CarCategory
                         key={car._id}

@@ -1,8 +1,10 @@
+import DashboardLayout from "../../Layout/DashboardLayout";
 import Blogs from "../../Pages/Blogs/Blogs";
 import Cars from "../../Pages/Cars/Cars";
-import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+// import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Login from "../../Pages/Login/Login";
+import MyOrders from "../../Pages/SellerOption/MyOrders";
 import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
@@ -39,7 +41,13 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard',
-                element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+                element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+                children: [
+                    {
+                        path: '/dashboard',
+                        element: <MyOrders></MyOrders>
+                    }
+                ]
             },
         ]
     },
