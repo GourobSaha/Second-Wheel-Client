@@ -10,6 +10,9 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AllBuyers from "../../Pages/AdminOption/AllBuyers";
 import AllSellers from "../../Pages/AdminOption/AllSellers";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
+import AddProduct from "../../Pages/SellerOption/AddProduct";
+import MyProducts from "../../Pages/SellerOption/MyProducts";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
@@ -57,6 +60,14 @@ const router = createBrowserRouter([
                     {
                         path: '/dashboard/allseller',
                         element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
+                    },
+                    {
+                        path: '/dashboard/addproduct',
+                        element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+                    },
+                    {
+                        path: '/dashboard/myproducts',
+                        element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
                     }
                 ]
             },
