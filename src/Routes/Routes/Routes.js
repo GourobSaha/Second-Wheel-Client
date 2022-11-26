@@ -9,6 +9,7 @@ import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AllBuyers from "../../Pages/AdminOption/AllBuyers";
 import AllSellers from "../../Pages/AdminOption/AllSellers";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
@@ -51,11 +52,11 @@ const router = createBrowserRouter([
                     },
                     {
                         path: '/dashboard/allbuyers',
-                        element: <AllBuyers></AllBuyers>
+                        element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
                     },
                     {
                         path: '/dashboard/allseller',
-                        element: <AllSellers></AllSellers>
+                        element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
                     }
                 ]
             },
