@@ -2,12 +2,14 @@ import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 import useAdmin from '../Hooks/useAdmin';
+import useBuyer from '../Hooks/useBuyer';
 import useSeller from '../Hooks/useSeller';
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email);
     const [isSeller] = useSeller(user?.email);
+    const [isBuyer] = useBuyer(user?.email);
 
     return (
         <div className='container mx-auto'>
@@ -19,7 +21,12 @@ const DashboardLayout = () => {
                 <div className="drawer-side">
                     <label htmlFor="dashboard-nav" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-                        <li><Link to='/dashboard' className='font-bold shadow-md'>My Orders</Link></li>
+                        {
+                            isBuyer &&
+                            <>
+                                <li><Link to='/dashboard/myorder' className='font-bold shadow-md'>My Orders</Link></li>
+                            </>
+                        }
                         {
                             isAdmin &&
                             <>
