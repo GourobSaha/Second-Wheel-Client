@@ -63,7 +63,7 @@ const CarCategory = ({ car, setBookCar }) => {
                                 onClick={() => setBookCar(car)}
                             >Book Now <FaArrowAltCircleRight className='ml-1' /></label>
                             :
-                            <div className='tooltip tooltip-top' data-tip="Only buyer can book!!">
+                            <div className='tooltip tooltip-top' data-tip="Only buyer can book!">
                                 <button disabled className="btn bg-slate-600 btn-sm" >Book Now <FaArrowAltCircleRight className='ml-1' /></button>
                             </div>
                     }
