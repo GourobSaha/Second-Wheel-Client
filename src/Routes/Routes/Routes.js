@@ -4,9 +4,11 @@ import Cars from "../../Pages/Cars/Cars";
 // import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Login from "../../Pages/Login/Login";
-import MyOrders from "../../Pages/SellerOption/MyOrders";
+import MyOrders from "../../Pages/BuyerOption/MyOrders";
 import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AllBuyers from "../../Pages/AdminOption/AllBuyers";
+import AllSellers from "../../Pages/AdminOption/AllSellers";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
                     {
                         path: '/dashboard',
                         element: <MyOrders></MyOrders>
+                    },
+                    {
+                        path: '/dashboard/allbuyers',
+                        element: <AllBuyers></AllBuyers>
+                    },
+                    {
+                        path: '/dashboard/allseller',
+                        element: <AllSellers></AllSellers>
                     }
                 ]
             },
