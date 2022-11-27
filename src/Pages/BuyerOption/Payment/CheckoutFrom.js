@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const CheckoutFrom = ({ booking }) => {
     const [cardError, setCardError] = useState('');
@@ -10,7 +11,7 @@ const CheckoutFrom = ({ booking }) => {
 
     const stripe = useStripe();
     const elements = useElements();
-    const { resaleValue, email, buyer, _id } = booking;
+    const { resaleValue, email, buyer, _id, carId } = booking;
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -86,6 +87,12 @@ const CheckoutFrom = ({ booking }) => {
                 .then(data => {
                     console.log(data);
                     if (data.insertedId) {
+                        fetch(`http://localhost:5000/carstatus/${carId}`)
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                toast.success('Payment Success')
+                            })
                         setSuccess('Congrats! your is payment completed');
                         setTransactionId(paymentIntent.id);
                     }
@@ -116,7 +123,7 @@ const CheckoutFrom = ({ booking }) => {
                     }}
                 />
                 <button
-                    className='btn btn-sm mt-4 btn-primary'
+                    className='btn mt-6 btn-sm bg-green-700 border-none'
                     type="submit"
                     disabled={!stripe || !clientSecret || processing}>
                     Pay

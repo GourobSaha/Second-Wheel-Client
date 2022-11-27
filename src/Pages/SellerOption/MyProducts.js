@@ -37,6 +37,22 @@ const MyProducts = () => {
             })
     }
 
+    const handleAdvertise = (advertise) => {
+        fetch(`http://localhost:5000/advertise/${advertise._id}`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Successfully Advertised')
+                    refetch();
+                }
+            })
+    }
+
+
     return (
         <div>
             <h2 className="text-2xl font-semibold text-slate-600 text-center my-5">My Products</h2>
@@ -67,7 +83,7 @@ const MyProducts = () => {
                                         :
                                         <div className='text-center'>
                                             <p>Available</p>
-                                            <button className='btn btn-xs btn-outline btn-info'>Advertise</button>
+                                            <button onClick={() => handleAdvertise(sellercar)} className='btn btn-xs btn-outline btn-info'>Advertise</button>
                                         </div>
                                 }
                                 </td>
