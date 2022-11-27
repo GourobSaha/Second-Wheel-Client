@@ -49,7 +49,9 @@ const MyProducts = () => {
                                 }
                                 </td>
                                 <td>{sellercar.location}</td>
-                                <td><button className='btn btn-xs btn-outline btn-secondary'>Delete</button></td>
+                                <td>
+                                    <label htmlFor="confirmation-modal" className="btn btn-xs btn-outline btn-secondary">Delete</label>
+                                </td>
                             </tr>)
                         }
 

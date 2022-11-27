@@ -1,13 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmationModal from '../Shared/ConfirmationModal/ConfirmationModal';
 
 const AllSellers = () => {
-
-    const { data: sellers = [], refetch } = useQuery({
+    const [deleteSeller, setDeleteSeller] = useState(null)
+    const { data: sellers = [], refetch, isLoading } = useQuery({
         queryKey: ['Seller'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users?role=Seller');
+            const res = await fetch('http://localhost:5000/users?role=Seller', {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
@@ -35,11 +40,31 @@ const AllSellers = () => {
             })
     }
 
+    const handleDeleteSeller = (seller) => {
+        fetch(`http://localhost:5000/users/${seller._id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Successfully Deleted')
+                    refetch();
+                }
+            })
+    }
+
+    if (isLoading) {
+        return <div className="w-16 h-16 my-32 border-8 border-dashed rounded-full animate-spin dark:border-slate-800 mx-auto"></div>
+    }
+
     return (
         <div>
             <h2 className="text-2xl font-semibold text-slate-600 text-center my-5">All Sellers</h2>
             <div className="overflow-x-auto shadow-xl rounded-2xl">
-                <table className="table w-full">
+                <table className="table w-full text-center">
 
                     <thead>
                         <tr>
@@ -67,13 +92,24 @@ const AllSellers = () => {
                                             <button onClick={() => handleSellerVerify(seller._id, seller.email)} className='btn btn-xs btn-outline btn-success'>Verify</button>
                                     }
                                 </td>
-                                <td><button className='btn btn-xs btn-outline btn-secondary'>Delete</button></td>
+                                <td>
+                                    <label onClick={() => setDeleteSeller(seller)} htmlFor="confirmation-modal" className="btn btn-xs btn-outline btn-secondary">Delete</label>
+                                </td>
                             </tr>)
                         }
 
                     </tbody>
                 </table>
             </div>
+            {
+                deleteSeller &&
+                <ConfirmationModal
+                    title={`Are you sure you want to delete ${deleteSeller.name}?`}
+                    message={`If you delete this seller it can not be undone.`}
+                    modalData={deleteSeller}
+                    successAction={handleDeleteSeller}
+                ></ConfirmationModal>
+            }
         </div>
     );
 };
