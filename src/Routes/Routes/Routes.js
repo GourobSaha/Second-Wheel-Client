@@ -15,6 +15,8 @@ import AddProduct from "../../Pages/SellerOption/AddProduct";
 import MyProducts from "../../Pages/SellerOption/MyProducts";
 import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import Payment from "../../Pages/BuyerOption/Payment/Payment";
+import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
@@ -24,6 +26,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <DisplayError></DisplayError>,
         children: [
             {
                 path: '/',
@@ -50,6 +53,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+                errorElement: <DisplayError></DisplayError>,
                 children: [
                     {
                         path: '/dashboard',
@@ -58,6 +62,12 @@ const router = createBrowserRouter([
                     {
                         path: '/dashboard/myorder',
                         element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
+                    },
+                    {
+                        path: '/dashboard/payment/:id',
+                        element: <BuyerRoute><Payment></Payment></BuyerRoute>,
+                        loader: ({ params }) =>
+                            fetch(`http://localhost:5000/booking/${params.id}`)
                     },
                     {
                         path: '/dashboard/allbuyers',

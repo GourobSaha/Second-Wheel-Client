@@ -22,7 +22,8 @@ const BookingModal = ({ bookCar, setBookCar }) => {
             carName,
             resaleValue,
             phone,
-            meetingLocation
+            meetingLocation,
+            carId: bookCar._id
         }
 
         fetch('http://localhost:5000/bookings', {

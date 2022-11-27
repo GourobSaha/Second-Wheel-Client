@@ -61,6 +61,9 @@ const AddProduct = () => {
                         email: sellers[0].email,
                         isVerified: sellers[0].verified,
                         date: date,
+                        advertiseDate: date,
+                        advertise: false,
+                        purchaseYear: data.purchaseYear,
                         phone: data.phone,
                         soldOut: false,
                         reported: false
@@ -141,6 +144,13 @@ const AddProduct = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
+                                <span className="label-text">Year of Purchase</span>
+                            </label>
+                            <input type="text" className="input input-bordered w-full" {...register("purchaseYear", { required: 'Year of Use is Required' })} />
+                            {errors.purchaseYear && <p className='text-red-600 text-sm'>{errors.purchaseYear?.message}</p>}
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
                                 <span className="label-text">Year of Use</span>
                             </label>
                             <input type="number" className="input input-bordered w-full" {...register("usedYears", { required: 'Year of Use is Required' })} />
@@ -162,18 +172,18 @@ const AddProduct = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Description</span>
-                            </label>
-                            <textarea type="text" className="input input-bordered w-full" {...register("description", { required: 'Description is Required' })} />
-                            {errors.description && <p className='text-red-600 text-sm'>{errors.password?.description}</p>}
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
                                 <span className="label-text">Car Image</span>
                             </label>
                             <input type="file" className="input input-bordered p-2 w-full" {...register("img", { required: 'Image is Required' })} />
                             {errors.img && <p className='text-red-600 text-sm'>{errors.password?.img}</p>}
                         </div>
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Description</span>
+                        </label>
+                        <textarea type="text" className="input input-bordered w-full" {...register("description", { required: 'Description is Required' })} />
+                        {errors.description && <p className='text-red-600 text-sm'>{errors.password?.description}</p>}
                     </div>
 
                     <div className='text-center'>

@@ -9,7 +9,7 @@ const MyOrders = () => {
     const url = `http://localhost:5000/bookings?email=${user?.email}`;
     // console.log(url);
 
-    const { data: bookings = [] } = useQuery({
+    const { data: bookings = [], isLoading } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
@@ -21,6 +21,10 @@ const MyOrders = () => {
             return data;
         }
     })
+
+    if (isLoading) {
+        return <div className="w-16 h-16 my-32 border-8 border-dashed rounded-full animate-spin dark:border-slate-800 mx-auto"></div>
+    }
 
     return (
         <div>
