@@ -61,7 +61,8 @@ const AddProduct = () => {
                         isVerified: sellers[0].verified,
                         date: date,
                         phone: data.phone,
-                        soldOut: false
+                        soldOut: false,
+                        reported: false
                     }
                     console.log(car);
                     fetch('http://localhost:5000/cars', {
