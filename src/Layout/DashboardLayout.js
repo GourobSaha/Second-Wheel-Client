@@ -32,6 +32,7 @@ const DashboardLayout = () => {
                             <>
                                 <li><Link to='/dashboard/allbuyers' className='font-bold shadow-md'>All Buyers</Link></li>
                                 <li><Link to='/dashboard/allseller' className='font-bold shadow-md'>All Sellers</Link></li>
+                                <li><Link to='/dashboard/reported' className='font-bold shadow-md'>Reported Items</Link></li>
                             </>
                         }
                         {

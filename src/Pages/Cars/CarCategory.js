@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { FaArrowAltCircleRight } from 'react-icons/fa';
 import { MdVerifiedUser } from "react-icons/md";
 import { AuthContext } from '../../Contexts/AuthProvider';
@@ -7,7 +8,18 @@ import useBuyer from '../../Hooks/useBuyer';
 const CarCategory = ({ car, setBookCar }) => {
     const { user } = useContext(AuthContext);
     const [isBuyer] = useBuyer(user?.email);
-    const { img, name, description, location, resaleValue, originalPrice, condition, sellerName, usedYears, isVerified, date, soldOut, purchaseYear } = car;
+    const { img, name, description, location, resaleValue, originalPrice, condition, sellerName, usedYears, isVerified, date, soldOut, purchaseYear, _id } = car;
+
+    const handleReport = (id) => {
+        // console.log(id);
+        fetch(`http://localhost:5000/reportedcars/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Item Reported')
+                }
+            })
+    }
 
     return (
         <>
@@ -64,11 +76,21 @@ const CarCategory = ({ car, setBookCar }) => {
                         <div className="card-actions justify-center mt-5">
                             {
                                 isBuyer ?
-                                    <label
-                                        htmlFor="booking-modal"
-                                        className="btn bg-slate-600 btn-sm"
-                                        onClick={() => setBookCar(car)}
-                                    >Book Now <FaArrowAltCircleRight className='ml-1' /></label>
+                                    <div className='grid grid-cols-2 gap-5'>
+                                        <div>
+                                            <label
+                                                htmlFor="booking-modal"
+                                                className="btn bg-slate-600 btn-sm"
+                                                onClick={() => setBookCar(car)}
+                                            >Book Now <FaArrowAltCircleRight className='ml-1' /></label>
+                                        </div>
+                                        <div>
+                                            <label
+                                                className="btn bg-red-400 btn-sm"
+                                                onClick={() => handleReport(_id)}
+                                            >Report Item <FaArrowAltCircleRight className='ml-1' /></label>
+                                        </div>
+                                    </div>
                                     :
                                     <div className='tooltip tooltip-top' data-tip="Only buyer can book!">
                                         <button disabled className="btn bg-slate-600 btn-sm" >Book Now <FaArrowAltCircleRight className='ml-1' /></button>

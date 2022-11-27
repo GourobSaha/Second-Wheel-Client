@@ -3,23 +3,20 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import ConfirmationModal from '../Shared/ConfirmationModal/ConfirmationModal';
 
-const AllBuyers = () => {
-    const [deleteBuyer, setDeleteBuyer] = useState(null)
-    const { data: buyers = [], refetch, isLoading } = useQuery({
-        queryKey: ['Buyer'],
+const ReportedCars = () => {
+    const [deleteItem, setDeleteItem] = useState(null)
+
+    const { data: reported = [], refetch, isLoading } = useQuery({
+        queryKey: ['reported'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users?role=Buyer', {
-                headers: {
-                    authorization: `bearer ${localStorage.getItem('accessToken')}`
-                }
-            });
+            const res = await fetch('http://localhost:5000/reported');
             const data = await res.json();
             return data;
         }
     });
 
-    const handleDeleteBuyer = (buyer) => {
-        fetch(`http://localhost:5000/users/${buyer._id}`, {
+    const handelDeleteItem = (report) => {
+        fetch(`http://localhost:5000/report/${report._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -40,7 +37,7 @@ const AllBuyers = () => {
 
     return (
         <div>
-            <h2 className="text-2xl font-semibold text-slate-600 text-center my-5">All Buyers</h2>
+            <h2 className="text-2xl font-semibold text-slate-600 text-center my-5">All Sellers</h2>
             <div className="overflow-x-auto shadow-xl rounded-2xl">
                 <table className="table w-full text-center">
 
@@ -48,21 +45,21 @@ const AllBuyers = () => {
                         <tr>
                             <th></th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
+                            <th>Seller</th>
+                            <th>Status</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         {
-                            buyers.map((buyer, i) => <tr key={buyer._id}>
+                            reported.map((report, i) => <tr key={report._id}>
                                 <th>{i + 1}</th>
-                                <td>{buyer.name}</td>
-                                <td>{buyer.email}</td>
-                                <td>{buyer.role}</td>
+                                <td>{report.name}</td>
+                                <td>{report.sellerName}</td>
+                                <td>Reported</td>
                                 <td>
-                                    <label onClick={() => setDeleteBuyer(buyer)} htmlFor="confirmation-modal" className="btn btn-xs btn-outline btn-secondary">Delete</label>
+                                    <label onClick={() => setDeleteItem(report)} htmlFor="confirmation-modal" className="btn btn-xs btn-outline btn-secondary">Delete</label>
                                 </td>
                             </tr>)
                         }
@@ -71,16 +68,16 @@ const AllBuyers = () => {
                 </table>
             </div>
             {
-                deleteBuyer &&
+                deleteItem &&
                 <ConfirmationModal
-                    title={`Are you sure you want to delete ${deleteBuyer.name}?`}
-                    message={`If you delete this buyer it can not be undone.`}
-                    modalData={deleteBuyer}
-                    successAction={handleDeleteBuyer}
+                    title={`Are you sure you want to delete ${deleteItem.name}?`}
+                    message={`If you delete this car can not be undone.`}
+                    modalData={deleteItem}
+                    successAction={handelDeleteItem}
                 ></ConfirmationModal>
             }
         </div>
     );
 };
 
-export default AllBuyers;
+export default ReportedCars;

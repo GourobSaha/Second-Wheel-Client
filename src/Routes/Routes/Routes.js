@@ -17,6 +17,7 @@ import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Payment from "../../Pages/BuyerOption/Payment/Payment";
 import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
+import ReportedCars from "../../Pages/AdminOption/ReportedCars";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
                     {
                         path: '/dashboard/allseller',
                         element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
+                    },
+                    {
+                        path: '/dashboard/reported',
+                        element: <AdminRoute><ReportedCars></ReportedCars></AdminRoute>
                     },
                     {
                         path: '/dashboard/addproduct',
