@@ -26,7 +26,7 @@ const BookingModal = ({ bookCar, setBookCar }) => {
             carId: bookCar._id
         }
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://second-wheel-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

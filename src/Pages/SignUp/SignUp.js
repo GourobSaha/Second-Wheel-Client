@@ -50,7 +50,7 @@ const SignUp = () => {
         const user = {
             name, email, role
         };
-        fetch('http://localhost:5000/users', {
+        fetch('https://second-wheel-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

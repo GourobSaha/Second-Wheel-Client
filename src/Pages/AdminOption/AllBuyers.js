@@ -10,7 +10,7 @@ const AllBuyers = () => {
     const { data: buyers = [], refetch, isLoading } = useQuery({
         queryKey: ['Buyer'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users?role=Buyer', {
+            const res = await fetch('https://second-wheel-server.vercel.app/users?role=Buyer', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -21,7 +21,7 @@ const AllBuyers = () => {
     });
 
     const handleDeleteBuyer = (buyer) => {
-        fetch(`http://localhost:5000/users/${buyer._id}`, {
+        fetch(`https://second-wheel-server.vercel.app/users/${buyer._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

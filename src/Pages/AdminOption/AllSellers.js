@@ -10,7 +10,7 @@ const AllSellers = () => {
     const { data: sellers = [], refetch, isLoading } = useQuery({
         queryKey: ['Seller'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users?role=Seller', {
+            const res = await fetch('https://second-wheel-server.vercel.app/users?role=Seller', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -21,7 +21,7 @@ const AllSellers = () => {
     });
 
     const handleSellerVerify = (id, email) => {
-        fetch(`http://localhost:5000/users/buyers/${id}`, {
+        fetch(`https://second-wheel-server.vercel.app/users/buyers/${id}`, {
             method: "PUT",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -30,7 +30,7 @@ const AllSellers = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    fetch(`http://localhost:5000/allcars?email=${email}`)
+                    fetch(`https://second-wheel-server.vercel.app/allcars?email=${email}`)
                         .then(res => res.json())
                         .then(data => {
                             console.log(data);
@@ -43,7 +43,7 @@ const AllSellers = () => {
     }
 
     const handleDeleteSeller = (seller) => {
-        fetch(`http://localhost:5000/users/${seller._id}`, {
+        fetch(`https://second-wheel-server.vercel.app/users/${seller._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

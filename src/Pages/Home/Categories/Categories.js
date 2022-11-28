@@ -7,7 +7,7 @@ const Categories = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/categories')
+        axios.get('https://second-wheel-server.vercel.app/categories')
             .then(data => {
                 const categoriesData = data.data;
                 // console.log(categoriesData);

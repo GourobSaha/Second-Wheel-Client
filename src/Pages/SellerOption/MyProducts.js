@@ -13,7 +13,7 @@ const MyProducts = () => {
     const { data: sellercars = [], refetch } = useQuery({
         queryKey: ['email'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/sellercars?email=${user.email}`, {
+            const res = await fetch(`https://second-wheel-server.vercel.app/sellercars?email=${user.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -24,7 +24,7 @@ const MyProducts = () => {
     });
 
     const handleDeleteProduct = (product) => {
-        fetch(`http://localhost:5000/product/${product._id}`, {
+        fetch(`https://second-wheel-server.vercel.app/product/${product._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -40,7 +40,7 @@ const MyProducts = () => {
     }
 
     const handleAdvertise = (advertise) => {
-        fetch(`http://localhost:5000/advertise/${advertise._id}`, {
+        fetch(`https://second-wheel-server.vercel.app/advertise/${advertise._id}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
             }

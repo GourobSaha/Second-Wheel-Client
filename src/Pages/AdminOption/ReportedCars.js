@@ -11,14 +11,14 @@ const ReportedCars = () => {
     const { data: reported = [], refetch, isLoading } = useQuery({
         queryKey: ['reported'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/reported');
+            const res = await fetch('https://second-wheel-server.vercel.app/reported');
             const data = await res.json();
             return data;
         }
     });
 
     const handelDeleteItem = (report) => {
-        fetch(`http://localhost:5000/report/${report._id}`, {
+        fetch(`https://second-wheel-server.vercel.app/report/${report._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

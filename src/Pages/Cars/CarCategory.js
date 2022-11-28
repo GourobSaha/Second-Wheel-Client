@@ -12,7 +12,7 @@ const CarCategory = ({ car, setBookCar }) => {
 
     const handleReport = (id) => {
         // console.log(id);
-        fetch(`http://localhost:5000/reportedcars/${id}`)
+        fetch(`https://second-wheel-server.vercel.app/reportedcars/${id}`)
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {

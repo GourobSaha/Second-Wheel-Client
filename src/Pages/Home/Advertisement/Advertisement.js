@@ -6,7 +6,7 @@ const Advertisement = () => {
     const { data: advertise = [], isLoading } = useQuery({
         queryKey: ['advertise'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/advertisedcars');
+            const res = await fetch('https://second-wheel-server.vercel.app/advertisedcars');
             const data = await res.json();
             return data;
         }

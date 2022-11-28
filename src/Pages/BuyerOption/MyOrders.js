@@ -8,7 +8,7 @@ const MyOrders = () => {
     useTitle('My Orders')
     const { user } = useContext(AuthContext);
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `https://second-wheel-server.vercel.app/bookings?email=${user?.email}`;
     // console.log(url);
 
     const { data: bookings = [], isLoading } = useQuery({

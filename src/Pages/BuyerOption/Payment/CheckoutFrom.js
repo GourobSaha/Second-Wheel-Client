@@ -15,7 +15,7 @@ const CheckoutFrom = ({ booking }) => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://second-wheel-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const CheckoutFrom = ({ booking }) => {
                 email,
                 bookingId: _id
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://second-wheel-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -87,7 +87,7 @@ const CheckoutFrom = ({ booking }) => {
                 .then(data => {
                     console.log(data);
                     if (data.insertedId) {
-                        fetch(`http://localhost:5000/carstatus/${carId}`)
+                        fetch(`https://second-wheel-server.vercel.app/carstatus/${carId}`)
                             .then(res => res.json())
                             .then(data => {
                                 console.log(data);

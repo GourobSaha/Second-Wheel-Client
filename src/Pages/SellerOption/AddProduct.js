@@ -17,7 +17,7 @@ const AddProduct = () => {
     const { data: sellers = [], isLoading, refetch } = useQuery({
         queryKey: ['Seller'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/seller?email=${user?.email}`);
+            const res = await fetch(`https://second-wheel-server.vercel.app/seller?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -71,7 +71,7 @@ const AddProduct = () => {
                         reported: false
                     }
                     console.log(car);
-                    fetch('http://localhost:5000/cars', {
+                    fetch('https://second-wheel-server.vercel.app/cars', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
