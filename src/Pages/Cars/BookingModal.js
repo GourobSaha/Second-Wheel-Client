@@ -41,7 +41,8 @@ const BookingModal = ({ bookCar, setBookCar }) => {
                     toast.success('Booking Confirmed');
                 }
                 else {
-                    toast(data.message);
+                    toast.error(data.message);
+                    setBookCar(null);
                 }
             })
 

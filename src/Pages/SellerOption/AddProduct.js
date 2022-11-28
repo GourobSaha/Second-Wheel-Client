@@ -12,7 +12,7 @@ const AddProduct = () => {
     const imageHostKey = process.env.REACT_APP_imgbb_key;
     // console.log(imageHostKey);
 
-    const { data: sellers = [], isLoading } = useQuery({
+    const { data: sellers = [], isLoading, refetch } = useQuery({
         queryKey: ['Seller'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/seller?email=${user?.email}`);
@@ -84,6 +84,7 @@ const AddProduct = () => {
                                 toast.success('Product Added Successfully');
                                 navigate('/dashboard/myproducts')
                                 reset();
+                                refetch();
                             }
 
                         })
