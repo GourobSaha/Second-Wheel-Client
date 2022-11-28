@@ -1,7 +1,9 @@
 import React from 'react';
+import useTitle from '../../Hooks/useTitle';
 import blogImg from '../../Images/blogs/2021-09-28_Angular-React-Vue_table_en.png'
 
 const Blogs = () => {
+    useTitle('Blogs')
     return (
         <div className='container mx-auto'>
             <h2 className='text-4xl text-slate-600 font-bold text-center my-5'>Blogs</h2>

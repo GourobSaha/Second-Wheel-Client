@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import useTitle from '../../Hooks/useTitle';
 import BookingModal from './BookingModal';
 import CarCategory from './CarCategory';
 
 const Cars = () => {
+    useTitle('Cars')
     const cars = useLoaderData();
     // console.log(cars);
     const [bookCar, setBookCar] = useState(null)

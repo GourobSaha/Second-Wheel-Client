@@ -2,9 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import useTitle from '../../Hooks/useTitle';
 import ConfirmationModal from '../Shared/ConfirmationModal/ConfirmationModal';
 
 const MyProducts = () => {
+    useTitle('My Products')
     const { user } = useContext(AuthContext);
     const [deleteProduct, setDeleteProduct] = useState(null);
 

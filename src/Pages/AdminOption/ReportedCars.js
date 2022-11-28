@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import useTitle from '../../Hooks/useTitle';
 import ConfirmationModal from '../Shared/ConfirmationModal/ConfirmationModal';
 
 const ReportedCars = () => {
+    useTitle('Reported Items')
     const [deleteItem, setDeleteItem] = useState(null)
 
     const { data: reported = [], refetch, isLoading } = useQuery({
